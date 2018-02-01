@@ -86,10 +86,12 @@ class ViewLayer {
   constructor() {
     this.elements = {
       'more': document.getElementById('more'),
-      'preview': document.querySelector('.preview'),
+      // 'preview': document.querySelector('preview'),
       'aList': document.getElementById('attendees-list'),
       'date': document.getElementById('date'),
       'img': document.getElementById('avatar'),
+      // 'data':document.createElementyClass('.content')
+
     }
     this.moreEventListener()
     this.showData(data)
@@ -101,20 +103,28 @@ class ViewLayer {
       // code for task #3
     });
   }
+
+
+
   showAttendeesList(data){
     for (var i in data.attendees) {
       let element = document.createElement('li');
       element.classList.add('list-group-item');
-      let img = document.createElement('img')
-      img.src = data.attendees[key].image
-      element.innerHTML = data.attendees[key].name;
+      let img = document.createElement('img');
+      img.src = data.attendees[i].image
+      img.style.width = "100px";
+      img.style.margin = "20px";
+      element.innerHTML = data.attendees[i].name;
       this.elements.aList.appendChild(element).appendChild(img);
     };
   }
+  // empty string
   showData(data = {}){
-    // here comes code for task #7
-    this.elements.date.innerHTML = `<button class=\"btn\">${ data.meta.day }</button>${data.meta.month}`
-    this.elements.img.src = data.organizer.img
+    // this elements.data.innerHTML = data.content;
+    this.elements.date.innerHTML = `<button class="btn">${ data.meta.day }</button>${data.meta.month}`
+    this.elements.img.src = data.organizer.img;
+    
+
   }
 }
 const instance_of_view = new ViewLayer();
