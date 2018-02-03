@@ -93,6 +93,8 @@ class ViewLayer {
       'input':document.getElementById('button'),
       'button':document.getElementById('but'),
 
+
+
     }
     this.moreEventListener()
     this.showData(data)
@@ -127,7 +129,6 @@ class ViewLayer {
       let p = document.createElement('p');
       let img = document.createElement('img');
 
-       
            
 
       h1.innerHTML = data.attendees[i].name;
@@ -152,18 +153,19 @@ class ViewLayer {
     let small = document.querySelector('h3 > small');
     let organizerName = document.querySelectorAll('ul li');
     let locat = document.getElementById('text');
-   
-     organizerName[0].innerHTML  = "Hosted by:" +  data.organizer.clearname;
-     organizerName[1].innerHTML = "From:" + data.name;
+  
+    organizerName[0].innerHTML  = "Hosted by:" +  data.organizer.clearname;
+    organizerName[1].innerHTML = "From:" + data.name;
     // console.log( organizerName);
-      span.innerHTML = data.name;
-      small.innerHTML = data.type;
-      locat.innerHTML = `${data.meta.location.street}
+    span.innerHTML = data.name;
+    small.innerHTML = data.type;
+    locat.innerHTML = `${data.meta.location.street}
                         ${data.meta.location.zip}
                         ${data.meta.location.city}` 
-    this.elements.date.innerHTML = `<button class=\"btn\">${ data.meta.day }</button>${data.meta.month}`
+
+    this.elements.date.innerHTML = `<button class=\"btn\">${ data.meta.day }${data.meta.month}</button>`
     this.elements.img.src = data.organizer.img;
-    
+    button.style.width="100px";
   }
 }
 const instance_of_view = new ViewLayer();
