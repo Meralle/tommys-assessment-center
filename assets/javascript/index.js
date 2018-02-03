@@ -86,45 +86,84 @@ class ViewLayer {
   constructor() {
     this.elements = {
       'more': document.getElementById('more'),
-      // 'preview': document.querySelector('preview'),
+      'preview': document.querySelector('.preview'),
       'aList': document.getElementById('attendees-list'),
       'date': document.getElementById('date'),
       'img': document.getElementById('avatar'),
-      // 'data':document.createElementyClass('.content')
+      'input':document.getElementById('button'),
+      'button':document.getElementById('but'),
 
     }
     this.moreEventListener()
     this.showData(data)
     this.showAttendeesList(data)
+    this.searchButton()
+
   }
+
+  searchButton() {
+  this.elements.button.addEventListener('click', (e) =>{
+    e.preventDefault();
+    console.log(this.elements.input.value);
+  });
+
+  }  
+
+
   moreEventListener(){
     this.elements.more.addEventListener("click", (e) => {
       e.preventDefault();
-      // code for task #3
-    });
+      this.elements.preview.classList.remove("preview");
+     
+      });
   }
-
-
-
+   
   showAttendeesList(data){
     for (var i in data.attendees) {
       let element = document.createElement('li');
       element.classList.add('list-group-item');
+
+      let h1= document.createElement('h1');
+      let p = document.createElement('p');
       let img = document.createElement('img');
-      img.src = data.attendees[i].image
+
+       
+           
+
+      h1.innerHTML = data.attendees[i].name;
+      p.innerHTML = data.attendees[i].role;
+      img.src = data.attendees[i].image;
+     
       img.style.width = "100px";
       img.style.margin = "20px";
-      element.innerHTML = data.attendees[i].name;
-      this.elements.aList.appendChild(element).appendChild(img);
+      img.style.borderRadius ="50%";
+
+      element.appendChild(img);
+      element.appendChild(h1);
+      element.appendChild(p);
+      this.elements.aList.appendChild(element);
+
+    
     };
   }
   // empty string
   showData(data = {}){
-    // this elements.data.innerHTML = data.content;
-    this.elements.date.innerHTML = `<button class="btn">${ data.meta.day }</button>${data.meta.month}`
+    let span = document.querySelector('h3 > span');
+    let small = document.querySelector('h3 > small');
+    let organizerName = document.querySelectorAll('ul li');
+    let locat = document.getElementById('text');
+   
+     organizerName[0].innerHTML  = "Hosted by:" +  data.organizer.clearname;
+     organizerName[1].innerHTML = "From:" + data.name;
+    // console.log( organizerName);
+      span.innerHTML = data.name;
+      small.innerHTML = data.type;
+      locat.innerHTML = `${data.meta.location.street}
+                        ${data.meta.location.zip}
+                        ${data.meta.location.city}` 
+    this.elements.date.innerHTML = `<button class=\"btn\">${ data.meta.day }</button>${data.meta.month}`
     this.elements.img.src = data.organizer.img;
     
-
   }
 }
 const instance_of_view = new ViewLayer();
