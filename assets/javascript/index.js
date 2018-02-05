@@ -92,7 +92,7 @@ class ViewLayer {
       'img': document.getElementById('avatar'),
       'input':document.getElementById('button'),
       'button':document.getElementById('but'),
-
+      'newdivText':document.getElementById('newdivText'),
 
 
     }
@@ -163,9 +163,11 @@ class ViewLayer {
                         ${data.meta.location.zip}
                         ${data.meta.location.city}` 
 
+    newdivText.innerHTML = data.content;
+    newdivText.style.fontSize = "16px";
     this.elements.date.innerHTML = `<button class=\"btn\">${ data.meta.day }${data.meta.month}</button>`
     this.elements.img.src = data.organizer.img;
-    button.style.width="100px";
+  
   }
 }
 const instance_of_view = new ViewLayer();
